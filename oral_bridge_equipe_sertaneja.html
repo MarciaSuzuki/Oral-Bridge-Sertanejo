@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oral Bridge - Equipe Sertaneja</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root{--bg-primary:#F6F5EB;--bg-secondary:#FFFFFF;--bg-tertiary:#C5C29F;--text-primary:#0A0703;--text-secondary:#3F3E20;--text-muted:#777D45;--accent:#BE4A01;--accent-light:#F6F5EB;--accent-hover:#8a3601;--border:#C5C29F;--success:#777D45;--success-bg:#e8e9d9;--agent1:#BE4A01;--agent2:#89AAA3;--agent3:#777D45;--agent4:#3F3E20;--validator-primary:#89AAA3;--validator-bg:#e8f2f0;--validator-border:#89AAA3;--shadow-sm:0 1px 2px rgba(10,7,3,0.08);--shadow-md:0 4px 6px -1px rgba(10,7,3,0.1),0 2px 4px -1px rgba(10,7,3,0.06);--shadow-lg:0 10px 15px -3px rgba(10,7,3,0.12),0 4px 6px -2px rgba(10,7,3,0.07);--radius:8px;--radius-lg:12px}
+        *{margin:0;padding:0;box-sizing:border-box}body{font-family:'DM Sans',sans-serif;background:var(--bg-primary);color:var(--text-primary);line-height:1.6;min-height:100vh}.container{max-width:1000px;margin:0 auto;padding:2rem}header{text-align:center;margin-bottom:2rem;padding-bottom:1.5rem;border-bottom:1px solid var(--border)}.logo{display:flex;align-items:center;justify-content:center;gap:0.75rem;margin-bottom:0.5rem}.logo-icon{width:48px;height:48px;background:transparent;border-radius:12px;display:flex;align-items:center;justify-content:center}.logo-icon svg{width:48px;height:48px}h1{font-family:'Source Serif 4',serif;font-size:2rem;font-weight:600}.subtitle{color:var(--text-secondary);font-size:1rem;margin-top:0.25rem}
+        .setup-section{background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.5rem;margin-bottom:1.5rem;box-shadow:var(--shadow-sm)}.setup-row{display:flex;gap:1rem;flex-wrap:wrap;align-items:flex-end}.input-group{flex:1;min-width:180px}.input-group label{display:block;font-weight:500;margin-bottom:0.5rem;font-size:0.95rem}.input-group input,.input-group select{width:100%;padding:0.75rem 1rem;border:1px solid var(--border);border-radius:var(--radius);font-size:1rem;font-family:inherit;background:var(--bg-primary)}.input-group input:focus,.input-group select:focus{outline:none;border-color:var(--accent);background:var(--bg-secondary)}
+        .progress-steps{display:flex;justify-content:center;gap:0.5rem;margin-bottom:2rem;flex-wrap:wrap}.step{display:flex;align-items:center;gap:0.5rem;padding:0.5rem 0.875rem;background:var(--bg-secondary);border:2px solid var(--border);border-radius:25px;font-size:0.85rem;font-weight:500;color:var(--text-muted);transition:all 0.3s ease;cursor:pointer}.step:hover{background:var(--bg-tertiary)}.step-number{width:22px;height:22px;border-radius:50%;background:var(--border);display:flex;align-items:center;justify-content:center;font-size:0.75rem;font-weight:600}.step.active{border-color:var(--accent);color:var(--accent);background:var(--accent-light)}.step.active .step-number{background:var(--accent);color:white}.step.completed{border-color:var(--success);color:var(--success);background:var(--success-bg)}.step.completed .step-number{background:var(--success);color:white}
+        .main-card{background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-md);margin-bottom:1.5rem}.card-header{padding:1.25rem 1.5rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:0.75rem}.step-badge{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:1rem;color:white}.step-1 .step-badge{background:var(--agent1)}.step-2 .step-badge{background:var(--agent2)}.step-3 .step-badge{background:var(--agent3)}.step-4 .step-badge{background:var(--agent4)}.card-title h2{font-size:1.1rem;font-weight:600;margin-bottom:0.125rem}.card-title p{font-size:0.9rem;color:var(--text-secondary)}.card-body{padding:1.5rem}
+        .text-box{width:100%;min-height:150px;padding:1rem;border:1px solid var(--border);border-radius:var(--radius);font-family:inherit;font-size:0.95rem;line-height:1.7;resize:vertical;background:var(--bg-primary)}.text-box:focus{outline:none;border-color:var(--accent);background:var(--bg-secondary)}.text-box.output{background:var(--bg-tertiary);font-family:'Source Serif 4',serif;font-size:1.05rem}.text-box.json-output{font-family:monospace;font-size:0.85rem;background:#1a1a1a;color:#e0e0e0;border:none}.text-box.editable{background:var(--bg-secondary);border:2px solid var(--accent)}.text-label{display:block;font-weight:500;margin-bottom:0.5rem;font-size:0.95rem}
+        .btn{padding:0.75rem 1.5rem;border:none;border-radius:var(--radius);font-size:1rem;font-weight:500;cursor:pointer;transition:all 0.2s ease;font-family:inherit;display:inline-flex;align-items:center;justify-content:center;gap:0.5rem}.btn-large{padding:1rem 2rem;font-size:1.1rem;border-radius:var(--radius-lg)}.btn-primary{background:var(--accent);color:white}.btn-primary:hover{background:var(--accent-hover);transform:translateY(-1px);box-shadow:var(--shadow-md)}.btn-secondary{background:var(--bg-tertiary);color:var(--text-primary);border:1px solid var(--border)}.btn-secondary:hover{background:var(--border)}.btn-success{background:var(--success);color:white}.btn-success:hover{background:#14532d}.btn-small{padding:0.5rem 1rem;font-size:0.85rem}.button-row{display:flex;gap:0.75rem;flex-wrap:wrap;margin-top:1.5rem}.button-row-center{justify-content:center}
+        .loading{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:3rem;gap:1rem}.spinner{width:48px;height:48px;border:4px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin 1s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}.loading-text{font-size:1.1rem;color:var(--text-secondary)}.message{padding:1rem 1.25rem;border-radius:var(--radius);margin-bottom:1rem;font-size:0.95rem}.message-error{background:#FEF2F2;border:1px solid #FECACA;color:#991B1B}.message-success{background:var(--success-bg);border:1px solid #86EFAC;color:var(--success)}.message-info{background:#EBF8FF;border:1px solid #90CDF4;color:#2B6CB0}.hidden{display:none !important}footer{text-align:center;padding:1.5rem 0;color:var(--text-muted);font-size:0.85rem}
+        .validator-audio-panel{background:#e8f2f0;border:2px solid #89AAA3;border-radius:var(--radius-lg);padding:2rem;text-align:center}.main-play-btn{width:120px;height:120px;border-radius:50%;background:linear-gradient(135deg,#89AAA3,#6a8a84);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;margin:2rem auto;box-shadow:var(--shadow-lg);transition:all 0.3s ease}.main-play-btn:hover{transform:scale(1.05);box-shadow:0 15px 30px rgba(137,170,163,0.4)}.main-play-btn:active{transform:scale(0.98)}.main-play-btn svg{width:50px;height:50px;fill:white}.main-play-btn.playing{background:linear-gradient(135deg,#BE4A01,#8a3601)}
+        .segment-nav{display:flex;height:60px;border-radius:var(--radius-lg);overflow:hidden;margin:1.5rem 0;border:2px solid #89AAA3;background:white}.segment-block{cursor:pointer;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:1.2rem;transition:all 0.2s;position:relative}.segment-block:hover{filter:brightness(0.92)}.segment-block.playing::after{content:'';position:absolute;bottom:4px;left:50%;transform:translateX(-50%);width:8px;height:8px;background:currentColor;border-radius:50%;animation:pulse 1s ease-in-out infinite}@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+        .audio-progress{height:10px;background:#C5C29F;border-radius:5px;cursor:pointer;margin:1rem 0;overflow:hidden}.audio-progress-fill{height:100%;background:#89AAA3;border-radius:5px;width:0%;transition:width 0.1s}
+        .status-indicator{font-size:1.1rem;font-weight:600;margin:1rem 0;min-height:2rem}.time-display{font-family:'DM Sans',monospace;font-size:2rem;font-weight:600;color:#89AAA3;margin:1rem 0}
+        .analysis-section{background:linear-gradient(135deg,#F6F5EB,#e8e9d9);border:2px solid #89AAA3;border-radius:var(--radius-lg);padding:1.5rem;margin:1.5rem 0}
+        .analysis-header{display:flex;align-items:center;gap:0.75rem;margin-bottom:1rem;padding-bottom:0.75rem;border-bottom:1px solid #89AAA3}
+        .analysis-header h3{color:#3F3E20;margin:0}
+        .executive-summary{background:white;border:1px solid #89AAA3;border-radius:var(--radius);padding:1rem;margin-bottom:1rem;font-style:italic;color:var(--text-secondary)}
+        .analysis-category{background:white;border:1px solid #C5C29F;border-radius:var(--radius);padding:1rem;margin:0.75rem 0}
+        .analysis-category h4{color:#3F3E20;margin-bottom:0.75rem;display:flex;align-items:center;gap:0.5rem}
+        .analysis-category.exegetical{border-left:4px solid #BE4A01}
+        .analysis-category.style{border-left:4px solid #89AAA3}
+        .analysis-category.issues{border-left:4px solid #BE4A01}
+        .analysis-category.praise{border-left:4px solid #777D45}
+        .analysis-item{background:#F6F5EB;border-radius:6px;padding:0.75rem;margin:0.5rem 0;font-size:0.9rem}
+        .analysis-item.warning{background:#fef3e2;border-left:3px solid #BE4A01}
+        .analysis-item.issue{background:#fde8e0;border-left:3px solid #BE4A01}
+        .analysis-item.good{background:#e8e9d9;border-left:3px solid #777D45}
+        .analysis-label{font-weight:600;color:var(--text-primary);display:block;margin-bottom:0.25rem}
+        .analysis-detail{color:var(--text-secondary);font-size:0.85rem}
+        .recommendation-box{background:#e8e9d9;border:1px solid #777D45;border-radius:var(--radius);padding:1rem;margin-top:1rem}
+        .recommendation-box h5{color:#3F3E20;margin-bottom:0.5rem}
+        .suggested-revision{background:#F6F5EB;border:2px dashed #777D45;border-radius:var(--radius);padding:1rem;margin-top:1rem;font-family:'Source Serif 4',serif}
+        .edit-section{background:var(--accent-light);border:2px solid var(--accent);border-radius:var(--radius-lg);padding:1.5rem;margin-top:1.5rem}
+        .edit-history{background:#f7fafc;border:1px solid var(--border);border-radius:var(--radius);padding:1rem;max-height:200px;overflow-y:auto;font-size:0.9rem;margin-top:1rem}.edit-item{padding:0.5rem;border-bottom:1px solid var(--border);font-size:0.85rem}.edit-item:last-child{border-bottom:none}
+        @media(max-width:768px){.container{padding:1rem}h1{font-size:1.5rem}.setup-row{flex-direction:column}.input-group{width:100%}.step{padding:0.5rem 0.75rem;font-size:0.8rem}.main-play-btn{width:100px;height:100px}.main-play-btn svg{width:40px;height:40px}}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo"><div class="logo-icon"><svg viewBox="0 0 1000 1000"><path fill="#BE4A01" d="M900,451.61V151.07H700a278.79,278.79,0,0,0-83.83,12.66c-71,22.3-116.17,92-116.17,92h0s-45-69.59-116.17-92A278.79,278.79,0,0,0,300,151.07H100V749H300a279.12,279.12,0,0,1,83.83,12.65C455,784,500,848.93,500,848.93h0s39.71-57.16,103.18-82.68c-.33-5.73-.52-11.49-.52-17.31C602.66,585,736.05,451.61,900,451.61Z"/><path fill="#BE4A01" d="M827.11,748.94H900V675.57C859.81,675.57,827.11,708.49,827.11,748.94Z"/><path fill="#BE4A01" d="M734.56,748.94h53.22c0-62.14,50.34-112.71,112.22-112.71V583.5C808.77,583.5,734.56,657.72,734.56,748.94Z"/><path fill="#BE4A01" d="M642,748.94q0,3,.08,6A281.75,281.75,0,0,1,695.22,749v-.1C695.22,636,787.08,544.16,900,544.16V490.94C757.74,490.94,642,606.68,642,748.94Z"/></svg></div><h1>Oral Bridge</h1></div>
+            <p class="subtitle">Equipe Sertaneja - Tradução Bíblica Assistida por IA</p>
+        </header>
+        <div id="setupSection" class="setup-section">
+            <div class="setup-row">
+                <div class="input-group"><label for="apiKey">Chave da API Anthropic</label><input type="password" id="apiKey" placeholder="sk-ant-..."></div>
+                <div class="input-group"><label for="elevenLabsKey">Chave da API ElevenLabs</label><input type="password" id="elevenLabsKey" placeholder="Para áudio"></div>
+                <div class="input-group" style="max-width:180px"><label for="modelSelect">Modelo</label><select id="modelSelect"><option value="claude-sonnet-4-20250514">Claude Sonnet 4</option><option value="claude-opus-4-5-20251101">Claude Opus 4.5</option></select></div>
+            </div>
+            <div class="setup-row" style="margin-top:1rem">
+                <div class="input-group"><label for="biblicalRef">Referência Bíblica</label><input type="text" id="biblicalRef" placeholder="ex: Rute 1:1-5"></div>
+                <div class="input-group"><label for="targetLang">Língua Alvo</label><select id="targetLang"><option value="sertanejo_paraibano">Sertanejo Paraibano</option><option value="portugues_oral">Português Oral (padrão)</option></select></div>
+                <div class="input-group"><label for="targetAudience">Público Alvo</label><input type="text" id="targetAudience" placeholder="ex: Agricultores do sertão"></div>
+            </div>
+            <div class="button-row button-row-center" style="margin-top:1.5rem"><button class="btn btn-primary btn-large" onclick="startStep1()">▶️ Iniciar Tradução</button></div>
+        </div>
+        <div id="progressSteps" class="progress-steps hidden">
+            <div class="step" id="step1Ind" onclick="goToStep(1)"><span class="step-number">1</span><span>Mapear Eventos</span></div>
+            <div class="step" id="step2Ind" onclick="goToStep(2)"><span class="step-number">2</span><span>Mapear Discurso</span></div>
+            <div class="step" id="step3Ind" onclick="goToStep(3)"><span class="step-number">3</span><span>Revisar Rascunho</span></div>
+            <div class="step" id="step4Ind" onclick="goToStep(4)"><span class="step-number">4</span><span>Revisar Narração</span></div>
+        </div>
+        <div id="workArea" class="main-card hidden"></div>
+        <footer>
+            <div style="margin-bottom:0.5rem"><svg viewBox="0 0 1000 1000" style="width:32px;height:32px;vertical-align:middle;margin-right:0.5rem"><path fill="#777D45" d="M900,451.61V151.07H700a278.79,278.79,0,0,0-83.83,12.66c-71,22.3-116.17,92-116.17,92h0s-45-69.59-116.17-92A278.79,278.79,0,0,0,300,151.07H100V749H300a279.12,279.12,0,0,1,83.83,12.65C455,784,500,848.93,500,848.93h0s39.71-57.16,103.18-82.68c-.33-5.73-.52-11.49-.52-17.31C602.66,585,736.05,451.61,900,451.61Z"/><path fill="#777D45" d="M827.11,748.94H900V675.57C859.81,675.57,827.11,708.49,827.11,748.94Z"/><path fill="#777D45" d="M734.56,748.94h53.22c0-62.14,50.34-112.71,112.22-112.71V583.5C808.77,583.5,734.56,657.72,734.56,748.94Z"/><path fill="#777D45" d="M642,748.94q0,3,.08,6A281.75,281.75,0,0,1,695.22,749v-.1C695.22,636,787.08,544.16,900,544.16V490.94C757.74,490.94,642,606.68,642,748.94Z"/></svg></div>
+            <p style="font-weight:600;color:var(--text-secondary)">Projeto Vasos Preparados</p>
+            <p>Tradução Bíblica Shema • Universidade das Nações</p>
+        </footer>
+    </div>
+    <div id="voiceModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:2000;align-items:center;justify-content:center">
+        <div style="background:white;padding:2rem;border-radius:12px;max-width:500px;width:90%;max-height:80vh;overflow-y:auto">
+            <h3 style="margin-bottom:1rem">🎙️ Configurar Voz</h3>
+            <div id="voiceConfigList"></div>
+            <div class="button-row" style="justify-content:flex-end"><button class="btn btn-secondary" onclick="hideVoiceModal()">Cancelar</button><button class="btn btn-primary" onclick="saveVoiceConfig()">Salvar</button></div>
+        </div>
+    </div>
+    <div id="sendReportModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:2000;align-items:center;justify-content:center">
+        <div style="background:white;padding:2rem;border-radius:12px;max-width:500px;width:90%">
+            <h3 style="margin-bottom:1rem">📤 Enviar para Revisor</h3>
+            <div class="input-group" style="margin-bottom:1rem"><label>E-mail do Revisor</label><input type="email" id="reviewerEmail" placeholder="revisor@exemplo.com" style="width:100%;padding:0.75rem;border:1px solid var(--border);border-radius:var(--radius)"></div>
+            <div class="input-group" style="margin-bottom:1rem"><label>Suas Observações (opcional)</label><textarea id="reviewerNotes" rows="3" placeholder="Observações para o revisor..." style="width:100%;padding:0.75rem;border:1px solid var(--border);border-radius:var(--radius);font-family:inherit"></textarea></div>
+            <div class="button-row" style="justify-content:flex-end"><button class="btn btn-secondary" onclick="hideSendModal()">Cancelar</button><button class="btn btn-primary" onclick="sendToReviewer()">📧 Enviar Relatório</button></div>
+        </div>
+    </div>
+<script>
+let currentStep=0,outputs={},studio={text:'',firstDraft:'',editedDraft:'',segments:[],playingIdx:-1,isPlaying:false,analysis:null,editHistory:[],fullAudioUrl:null,approved:false},voiceConfig={};
+
+const LANGS={
+    sertanejo_paraibano:{name:"Sertanejo Paraibano",instruction:`Gere em português sertanejo paraibano autêntico, a variedade falada nas áreas rurais do Nordeste brasileiro, especialmente na Paraíba.
+
+CARACTERÍSTICAS LINGUÍSTICAS OBRIGATÓRIAS:
+• Use marcadores orais naturais do sertanejo: "Óia só...", "Vixe!", "Aí foi que...", "Daí pronto...", "Eita!", "Arretado!", "Oxente!"
+• Use o vocabulário regional: "aperreado" (preocupado), "arriado" (cansado), "avoado" (distraído), "buchudo" (barrigudo), "cabra" (homem), "muié" (mulher), "menino/a" ou "meu fi/fia" (criança/filho)
+• Contrações típicas: "pra" (para), "pro" (para o), "tá" (está), "cê" (você), "véi" (velho), "num" (não/em um), "né" (não é)
+• Pronúncia refletida na escrita quando natural: "muito" pode ser "muito" ou contextualmente apropriado
+• Estruturas de frase do português oral: ordem flexível, repetições para ênfase, pausas naturais
+• Use conectivos orais: "aí", "daí", "então", "pois é", "veja bem"
+• Inclua expressões idiomáticas nordestinas quando apropriado
+
+PADRÕES DE NARRATIVA ORAL:
+• Comece seções com chamadas de atenção: "Escuta só...", "Pois olha...", "Veja bem..."
+• Use transições naturais: "Aí depois...", "Quando foi um dia...", "Nesse tempo..."
+• Inclua marcadores de turno de fala: "Aí ele disse...", "E ela respondeu..."
+• Termine episódios com fechamentos naturais: "E foi assim que...", "Pronto, foi isso."
+
+IMPORTANTE: O texto deve soar como um contador de histórias sertanejo narrando para sua comunidade. Evite linguagem formal ou escrita. Preserve o significado bíblico completo enquanto usa a forma oral natural.`,speechLang:'pt-BR'},
+    portugues_oral:{name:"Português Oral (padrão)",instruction:`Gere em português brasileiro oral natural, adequado para narração de histórias.
+
+• Use marcadores orais: "Olha...", "Então...", "Aí...", "Pois é..."
+• Estrutura de frase oral com ordem natural
+• Conectivos de narrativa: "depois disso", "quando", "então"
+• Evite linguagem formal ou escrita
+• Mantenha a fidelidade completa ao significado bíblico`,speechLang:'pt-BR'}
+};
+
+const PROMPTS={1:`Você é o Arquiteto de Eventos. Converta a passagem bíblica em um Mapa de Significado JSON com: meta, frames, participants, events. Use Núcleos de Eventos fechados, papéis semânticos e modificadores. Retorne APENAS JSON válido.
+
+IMPORTANTE: Todos os rótulos e descrições devem estar em português brasileiro.`,
+
+2:`Você é o Tecelão de Discurso. Adicione estrutura de discurso ao Mapa de Significado: functional_genre, literary_form, thematic_spine, peak_event_id, e para cada evento adicione discourse_function (SET/BG/MAIN/EVAL), peak flag, e relações discourse_logic. Retorne apenas o JSON aprimorado.
+
+IMPORTANTE: Todos os rótulos e descrições devem estar em português brasileiro.`,
+
+3:`Você é o Contador de Histórias Oral. Transforme o Mapa de Significado em narrativa oral natural.
+
+=== RESTRIÇÕES DE FIDELIDADE (ABSOLUTAS) ===
+Você deve preservar FIDELIDADE SEMÂNTICA COMPLETA ao Mapa de Significado:
+• INCLUA cada evento, participante e relação no mapa
+• PRESERVE todos os papéis semânticos (agente, paciente, experienciador, etc.)
+• MANTENHA a sequência temporal e conexões lógicas
+• NUNCA adicione significados, interpretações ou fatos que não estão no mapa
+• NUNCA omita qualquer evento ou participante do mapa
+• NUNCA mude quem fez o quê para quem
+
+=== ADIÇÕES PROIBIDAS ===
+NÃO adicione:
+• Traços de caráter: "corajoso Davi", "malvado Faraó", "fiel Abraão"
+• Emoções não presentes no mapa: "disse com raiva", "foi alegre", "chorou triste"
+• Motivações: "porque estava com ciúme", "querendo ajudar"
+• Avaliações: "isso foi errado", "um grande milagre", "um momento importante"
+• Comentário teológico: "como Deus havia planejado", "mostrando Sua misericórdia"
+• Explicações: "o que significa...", "em outras palavras..."
+
+=== ENQUADRAMENTO ORAL PERMITIDO (Performance, não Conteúdo) ===
+Você PODE adicionar APENAS estes três tipos de pistas de navegação:
+
+1. MARCADORES DE ATENÇÃO (fáticos) - gerenciam o foco do ouvinte:
+   ✓ "Escuta só..." / "Óia..."
+   ✗ "Escuta, pois isso é importante..." (adiciona avaliação)
+
+2. MARCADORES ESTRUTURAIS (discursivos) - sinalizam transições:
+   ✓ "Essa foi a história de X. Agora começa Y..."
+   ✓ "Um tempo depois..." / "Enquanto isso..."
+   ✗ "Essa foi a incrível história de..." (adiciona avaliação)
+
+3. MARCADORES DE TURNO (dêiticos) - esclarecem falantes:
+   ✓ "Aí Moisés disse..." / "A mulher respondeu..."
+   ✗ "Aí Moisés, cheio de coragem, disse..." (adiciona traço)
+
+=== REGRA DE SUBTRAÇÃO ===
+Teste cada adição: Se removê-la não perde NENHUM fato teológico/narrativo, mas apenas causa confusão estrutural, é legítimo. Se removê-la perde informação, foi uma adição ilegítima.
+
+=== SAÍDA ===
+Gere narrativa oral natural. Soe como narrativa falada, não texto escrito. Use o registro oral da língua alvo. Produza APENAS a narrativa.`};
+
+const ANALYSIS_PROMPT=`Você é um Consultor de Tradução Bíblica especialista em Tradução Bíblica Oral (TBO). Você possui profunda competência em Hebraico Bíblico (Texto Massorético) e Grego Bíblico (Nestle-Aland), bem como princípios de missiologia, linguística e tradições de narrativa oral.
+
+=== SUA MENTALIDADE ===
+Você é parceiro do revisor humano. NÃO emita vereditos finais (ex: "Isso está errado"). Em vez disso, forneça observações, avaliações de risco e recomendações construtivas. Você valoriza Equivalência Dinâmica (tradução baseada em significado) sobre Equivalência Formal (palavra por palavra), desde que a intenção original seja preservada.
+
+=== PROTOCOLO DE ANÁLISE ===
+
+**1. VERIFICAÇÃO EXEGÉTICA E TEOLÓGICA (A Fonte)**
+- Compare o rascunho com os conceitos do texto original hebraico/grego representados no Mapa de Significado
+- O rascunho transmite a intenção comunicativa do autor original?
+- Os principais termos teológicos (Pecado, Aliança, Redenção, Graça, YHWH/Deus) são tratados corretamente?
+- Nota: Na TBO, termos complexos frequentemente requerem frases descritivas. Garanta que essas descrições sejam precisas.
+- Sinalize quaisquer ADIÇÕES NÃO JUSTIFICADAS (ideias não presentes ou implícitas no texto)
+- Sinalize quaisquer OMISSÕES PREJUDICIAIS (remoção de detalhes que alteram a trama ou teologia)
+- EXCEÇÃO: NÃO sinalize "Informação Implícita tornada Explícita" como erro - isso é necessário para TBO
+
+**2. VERIFICAÇÃO CULTURAL E ESTILÍSTICA (O Público)**
+- REGISTRO: A linguagem se adequa ao estilo de narrativa oral solicitado?
+- ORALIDADE: O texto é "amigável ao ouvido"?
+  - Procure marcadores visuais que precisam ser audíveis (ex: "Ele acenou" deveria ser "Ele concordou")
+  - Verifique conectivos que ajudam o fluxo ("Aí então," "Depois disso")
+- EXPRESSÕES: As expressões são naturais para o público alvo?
+- TRADUTÊS: Sinalize qualquer frase não natural que soa como texto traduzido em vez de fala natural
+- AVISO DE TRANSLITERAÇÃO: Seja hipervigilante sobre palavras hebraicas/gregas sendo transliteradas em vez de traduzidas
+
+**3. VERIFICAÇÃO DE METADISCURSO ORAL (Enquadramento da Performance)**
+Avalie o uso de pistas de navegação de acordo com as três categorias permitidas:
+- MARCADORES DE ATENÇÃO (fáticos): Eles gerenciam o foco do ouvinte sem adicionar avaliação?
+- MARCADORES ESTRUTURAIS (discursivos): Eles orientam o ouvinte sem adicionar interpretação?
+- MARCADORES DE TURNO (dêiticos): Eles esclarecem falantes sem adicionar caracterização?
+Aplique a REGRA DE SUBTRAÇÃO: Se remover uma pista não perde NENHUM fato teológico/narrativo mas apenas causa confusão estrutural, é legítimo.
+
+=== FORMATO DE SAÍDA ===
+Retorne como JSON com esta estrutura:
+{
+  "resumo_executivo": "Visão geral de 2-3 frases da qualidade do rascunho e principais preocupações",
+  "analise_exegetica": {
+    "precisao_teologica": "avaliação de quão bem os conceitos-chave são preservados",
+    "problemas": [
+      {
+        "segmento": "o texto problemático",
+        "conceito_hebraico_grego": "termo/significado original se aplicável",
+        "versao_rascunho": "o que o rascunho diz",
+        "analise": "explique a lacuna - é perda de significado? risco teológico?",
+        "gravidade": "alta|média|baixa",
+        "recomendacao": "correção sugerida ou pergunta para o revisor"
+      }
+    ],
+    "implicito_tornado_explicito": ["lista de esclarecimentos aceitáveis que ajudam a compreensão"]
+  },
+  "analise_estilo": {
+    "adequacao_registro": "avaliação se a linguagem se adequa à narrativa oral",
+    "pontuacao_oralidade": "classificação 1-5 de amigabilidade ao ouvido",
+    "elogios": ["excelentes adaptações culturais ou frases naturais"],
+    "criticas": [
+      {
+        "segmento": "frase problemática",
+        "problema": "o que está errado - tradutês, frase estranha, etc.",
+        "sugestao": "como melhorar"
+      }
+    ],
+    "avisos_transliteracao": ["quaisquer termos hebraicos/gregos não traduzidos"]
+  },
+  "metadiscurso_oral": {
+    "marcadores_atencao": {"exemplos": [], "avaliacao": ""},
+    "marcadores_estruturais": {"exemplos": [], "avaliacao": ""},
+    "marcadores_turno": {"exemplos": [], "avaliacao": ""},
+    "adicoes_ilegitimas": ["quaisquer pistas que adicionam conteúdo em vez de gerenciar processo"]
+  },
+  "revisao_sugerida": "Uma versão reescrita incorporando recomendações principais mantendo o estilo oral",
+  "avaliacao_geral": {
+    "pronto_para_performance": true/false,
+    "correcoes_prioritarias": ["lista das mudanças mais importantes necessárias"],
+    "pontos_fortes": ["o que o rascunho faz bem"]
+  }
+}
+
+IMPORTANTE: Toda a análise deve ser escrita em português brasileiro.`;
+
+const SEGMENT_COLORS=[{bg:'#e8f2f0',color:'#3F3E20'},{bg:'#e8e9d9',color:'#3F3E20'},{bg:'#F6F5EB',color:'#BE4A01'},{bg:'#C5C29F',color:'#0A0703'},{bg:'#d4e8e4',color:'#3F3E20'},{bg:'#f0ebe0',color:'#BE4A01'}];
+
+function startStep1(){
+    const apiKey=document.getElementById('apiKey').value,ref=document.getElementById('biblicalRef').value;
+    if(!apiKey)return alert('Por favor, insira sua chave de API.');
+    if(!ref)return alert('Por favor, insira uma referência bíblica.');
+    localStorage.setItem('anthropic_api_key',apiKey);
+    const el=document.getElementById('elevenLabsKey');
+    if(el.value)localStorage.setItem('elevenlabs_api_key',el.value);
+    document.getElementById('setupSection').classList.add('hidden');
+    currentStep=1;
+    document.getElementById('progressSteps').classList.remove('hidden');
+    document.getElementById('workArea').classList.remove('hidden');
+    updateProgress(1);
+    showStep(1);
+    runStep(1);
+}
+
+function updateProgress(step){for(let i=1;i<=4;i++){const ind=document.getElementById('step'+i+'Ind');ind.classList.remove('active','completed');if(i<step&&outputs[i])ind.classList.add('completed');else if(i===step)ind.classList.add('active');}}
+
+function showStep(step){const workArea=document.getElementById('workArea'),ref=document.getElementById('biblicalRef').value,lang=document.getElementById('targetLang').value,langName=LANGS[lang]?.name||lang;
+if(step===1){workArea.innerHTML='<div class="card-header step-1"><div class="step-badge">1</div><div class="card-title"><h2>Mapear os Eventos</h2><p>'+ref+'</p></div></div><div class="card-body"><div id="output1">'+(outputs[1]?'<div class="message message-success">✓ Passo 1 concluído</div><label class="text-label">Resultado:</label><textarea class="text-box json-output" rows="6" readonly>'+outputs[1]+'</textarea><div class="button-row"><button class="btn btn-secondary" onclick="navigator.clipboard.writeText(outputs[1]).then(()=>alert(\'Copiado!\'))">📋 Copiar</button><button class="btn btn-primary btn-large" onclick="goToStep(2)">▶️ Continuar para o Passo 2</button></div>':'')+'</div></div>';}
+else if(step===2){workArea.innerHTML='<div class="card-header step-2"><div class="step-badge">2</div><div class="card-title"><h2>Mapear o Discurso</h2><p>Fluxo narrativo</p></div></div><div class="card-body"><textarea class="text-box json-output" id="input2" rows="4" style="display:none">'+(outputs[1]||'')+'</textarea><div id="output2">'+(outputs[2]?'<div class="message message-success">✓ Passo 2 concluído</div><label class="text-label">Resultado:</label><textarea class="text-box json-output" rows="6" readonly>'+outputs[2]+'</textarea><div class="button-row"><button class="btn btn-secondary" onclick="goToStep(1)">← Voltar</button><button class="btn btn-secondary" onclick="navigator.clipboard.writeText(outputs[2]).then(()=>alert(\'Copiado!\'))">📋 Copiar</button><button class="btn btn-primary btn-large" onclick="goToStep(3)">▶️ Continuar para o Passo 3</button></div>':'')+'</div></div>';}
+else if(step===3){workArea.innerHTML=buildStep3UI();}
+else if(step===4){workArea.innerHTML=buildStep4UI();initStep4();}}
+
+function buildStep3UI(){const langName=LANGS[document.getElementById('targetLang').value]?.name||'Língua Alvo';
+let html='<div class="card-header step-3"><div class="step-badge">3</div><div class="card-title"><h2>Revisar o Rascunho</h2><p>'+langName+'</p></div></div><div class="card-body">';
+html+='<textarea class="text-box json-output" id="input3" rows="4" style="display:none">'+(outputs[2]||'')+'</textarea>';
+html+='<div id="step3Content">';
+if(!studio.firstDraft){html+='<div class="button-row button-row-center"><button class="btn btn-primary btn-large" onclick="generateAndAnalyzeDraft()">🤖 Gerar Rascunho</button><button class="btn btn-secondary" onclick="goToStep(2)" style="margin-left:0.5rem">← Voltar ao Passo 2</button></div>';}
+else{
+html+='<div class="message message-success">✓ Rascunho gerado</div>';
+html+='<label class="text-label">Rascunho Gerado (somente leitura):</label>';
+html+='<textarea class="text-box output" rows="6" readonly>'+escapeHtml(studio.firstDraft)+'</textarea>';
+if(studio.analysis){html+=renderAnalysis(studio.analysis);}
+html+='<div class="edit-section"><h3 style="color:var(--accent);margin-bottom:1rem">✏️ Editar o Rascunho</h3>';
+html+='<p style="margin-bottom:1rem;color:var(--text-secondary)">Revise a análise acima e faça as alterações necessárias no rascunho abaixo:</p>';
+html+='<textarea class="text-box editable" id="editableDraft" rows="8">'+escapeHtml(studio.editedDraft||studio.firstDraft)+'</textarea>';
+if(studio.editHistory.length>0){
+html+='<div class="edit-history"><strong>Histórico de Edições:</strong>';
+studio.editHistory.forEach((e,i)=>{html+='<div class="edit-item">'+new Date(e.timestamp).toLocaleTimeString()+': Edição salva #'+(i+1)+'</div>';});
+html+='</div>';}
+html+='<div class="button-row"><button class="btn btn-secondary" onclick="goToStep(2)">← Voltar ao Passo 2</button><button class="btn btn-secondary" onclick="saveDraftEdits()">💾 Salvar Edições</button><button class="btn btn-success btn-large" onclick="saveDraftEdits();goToStep(4)">🔊 Continuar para Narração →</button></div>';
+html+='</div>';}
+html+='</div></div>';
+return html;}
+
+function renderAnalysis(analysis){
+let html='<div class="analysis-section">';
+html+='<div class="analysis-header"><span style="font-size:1.5rem">📋</span><h3>Análise do Consultor de Tradução</h3></div>';
+
+// Resumo Executivo
+if(analysis.resumo_executivo||analysis.executive_summary){
+html+='<div class="executive-summary"><strong>Resumo Executivo:</strong> '+escapeHtml(analysis.resumo_executivo||analysis.executive_summary)+'</div>';}
+
+// Análise Exegética
+const exeg=analysis.analise_exegetica||analysis.exegetical_analysis;
+if(exeg){
+html+='<div class="analysis-category exegetical"><h4>📖 Verificação Exegética e Teológica</h4>';
+if(exeg.precisao_teologica||exeg.theological_accuracy){
+html+='<div class="analysis-item good"><span class="analysis-label">Precisão Teológica</span><span class="analysis-detail">'+escapeHtml(exeg.precisao_teologica||exeg.theological_accuracy)+'</span></div>';}
+const issues=exeg.problemas||exeg.issues;
+if(issues&&issues.length>0){
+issues.forEach(issue=>{
+const sev=issue.gravidade||issue.severity;
+const cls=sev==='alta'||sev==='high'?'issue':sev==='média'||sev==='medium'?'warning':'';
+html+='<div class="analysis-item '+cls+'">';
+html+='<span class="analysis-label">'+(sev==='alta'||sev==='high'?'⚠️ ':'')+'Problema: "'+escapeHtml(issue.segmento||issue.segment)+'"</span>';
+const hgc=issue.conceito_hebraico_grego||issue.hebrew_greek_concept;
+if(hgc)html+='<div class="analysis-detail"><strong>Hebraico/Grego:</strong> '+escapeHtml(hgc)+'</div>';
+const dr=issue.versao_rascunho||issue.draft_rendering;
+if(dr)html+='<div class="analysis-detail"><strong>Rascunho diz:</strong> '+escapeHtml(dr)+'</div>';
+html+='<div class="analysis-detail"><strong>Análise:</strong> '+escapeHtml(issue.analise||issue.analysis)+'</div>';
+const rec=issue.recomendacao||issue.recommendation;
+if(rec)html+='<div class="analysis-detail" style="color:#166534"><strong>Recomendação:</strong> '+escapeHtml(rec)+'</div>';
+html+='</div>';});}
+const impl=exeg.implicito_tornado_explicito||exeg.implicit_made_explicit;
+if(impl&&impl.length>0){
+html+='<div class="analysis-item good"><span class="analysis-label">✓ Esclarecimentos Implícito→Explícito Aceitáveis</span>';
+html+='<ul style="margin:0.5rem 0 0 1.5rem;font-size:0.85rem">';
+impl.forEach(item=>{html+='<li>'+escapeHtml(item)+'</li>';});
+html+='</ul></div>';}
+html+='</div>';}
+
+// Análise de Estilo
+const style=analysis.analise_estilo||analysis.style_analysis;
+if(style){
+html+='<div class="analysis-category style"><h4>🎭 Verificação de Estilo e Naturalidade</h4>';
+if(style.adequacao_registro||style.register_fit){
+html+='<div class="analysis-item"><span class="analysis-label">Adequação do Registro</span><span class="analysis-detail">'+escapeHtml(style.adequacao_registro||style.register_fit)+'</span></div>';}
+const oralScore=style.pontuacao_oralidade||style.orality_score;
+if(oralScore){
+const score=parseInt(oralScore)||3;
+const scoreClass=score>=4?'good':score>=3?'':'warning';
+html+='<div class="analysis-item '+scoreClass+'"><span class="analysis-label">Pontuação de Oralidade: '+score+'/5</span></div>';}
+const praise=style.elogios||style.praise;
+if(praise&&praise.length>0){
+html+='<div class="analysis-item good"><span class="analysis-label">✓ Excelentes Adaptações</span><ul style="margin:0.5rem 0 0 1.5rem;font-size:0.85rem">';
+praise.forEach(p=>{html+='<li>'+escapeHtml(p)+'</li>';});
+html+='</ul></div>';}
+const critiques=style.criticas||style.critiques;
+if(critiques&&critiques.length>0){
+critiques.forEach(c=>{
+html+='<div class="analysis-item warning"><span class="analysis-label">Problema de Estilo: "'+escapeHtml(c.segmento||c.segment)+'"</span>';
+html+='<div class="analysis-detail"><strong>Problema:</strong> '+escapeHtml(c.problema||c.issue)+'</div>';
+const sug=c.sugestao||c.suggestion;
+if(sug)html+='<div class="analysis-detail" style="color:#166534"><strong>Sugestão:</strong> '+escapeHtml(sug)+'</div>';
+html+='</div>';});}
+const transWarn=style.avisos_transliteracao||style.transliteration_warnings;
+if(transWarn&&transWarn.length>0){
+html+='<div class="analysis-item issue"><span class="analysis-label">⚠️ Avisos de Transliteração</span><ul style="margin:0.5rem 0 0 1.5rem;font-size:0.85rem">';
+transWarn.forEach(w=>{html+='<li>'+escapeHtml(w)+'</li>';});
+html+='</ul></div>';}
+html+='</div>';}
+
+// Metadiscurso Oral
+const meta=analysis.metadiscurso_oral||analysis.oral_metadiscourse;
+if(meta){
+html+='<div class="analysis-category"><h4>🎤 Enquadramento da Performance Oral</h4>';
+const types=[
+    {key:'marcadores_atencao',altKey:'attentional_markers',label:'Marcadores de Atenção'},
+    {key:'marcadores_estruturais',altKey:'structural_markers',label:'Marcadores Estruturais'},
+    {key:'marcadores_turno',altKey:'turn_taking_markers',label:'Marcadores de Turno'}
+];
+types.forEach(type=>{
+const data=meta[type.key]||meta[type.altKey];
+if(data&&(data.exemplos?.length>0||data.examples?.length>0||data.avaliacao||data.assessment)){
+html+='<div class="analysis-item"><span class="analysis-label">'+type.label+'</span>';
+const examples=data.exemplos||data.examples;
+if(examples&&examples.length>0){
+html+='<div class="analysis-detail">Exemplos: '+examples.map(e=>'"'+escapeHtml(e)+'"').join(', ')+'</div>';}
+const assess=data.avaliacao||data.assessment;
+if(assess)html+='<div class="analysis-detail">'+escapeHtml(assess)+'</div>';
+html+='</div>';}});
+const illegit=meta.adicoes_ilegitimas||meta.illegitimate_additions;
+if(illegit&&illegit.length>0){
+html+='<div class="analysis-item issue"><span class="analysis-label">⚠️ Adições Ilegítimas (adicionam conteúdo em vez de gerenciar processo)</span><ul style="margin:0.5rem 0 0 1.5rem;font-size:0.85rem">';
+illegit.forEach(a=>{html+='<li>'+escapeHtml(a)+'</li>';});
+html+='</ul></div>';}
+html+='</div>';}
+
+// Avaliação Geral
+const overall=analysis.avaliacao_geral||analysis.overall_assessment;
+if(overall){
+html+='<div class="recommendation-box"><h5>📊 Avaliação Geral</h5>';
+const ready=overall.pronto_para_performance!==undefined?overall.pronto_para_performance:overall.ready_for_performance;
+if(typeof ready==='boolean'){
+html+='<div style="margin-bottom:0.5rem"><strong>Pronto para Narração:</strong> '+(ready?'<span style="color:#777D45">✅ Sim</span>':'<span style="color:#BE4A01">❌ Ainda não</span>')+'</div>';}
+const strengths=overall.pontos_fortes||overall.strengths;
+if(strengths&&strengths.length>0){
+html+='<div style="margin-bottom:0.5rem"><strong>Pontos Fortes:</strong><ul style="margin:0.25rem 0 0 1.5rem">';
+strengths.forEach(s=>{html+='<li style="color:#777D45">'+escapeHtml(s)+'</li>';});
+html+='</ul></div>';}
+const fixes=overall.correcoes_prioritarias||overall.priority_fixes;
+if(fixes&&fixes.length>0){
+html+='<div><strong>Correções Prioritárias:</strong><ol style="margin:0.25rem 0 0 1.5rem">';
+fixes.forEach(f=>{html+='<li style="color:#BE4A01">'+escapeHtml(f)+'</li>';});
+html+='</ol></div>';}
+html+='</div>';}
+
+// Revisão Sugerida
+const suggested=analysis.revisao_sugerida||analysis.suggested_revision;
+if(suggested){
+html+='<div class="suggested-revision"><strong>📝 Revisão Sugerida:</strong><p style="margin-top:0.5rem;white-space:pre-wrap">'+escapeHtml(suggested)+'</p></div>';}
+
+html+='</div>';
+return html;}
+
+async function generateAndAnalyzeDraft(){const apiKey=document.getElementById('apiKey').value||localStorage.getItem('anthropic_api_key'),model=document.getElementById('modelSelect').value,lang=document.getElementById('targetLang').value,aud=document.getElementById('targetAudience').value,ref=document.getElementById('biblicalRef').value;
+const content=document.getElementById('step3Content');
+content.innerHTML='<div class="loading"><div class="spinner"></div><div class="loading-text">Gerando rascunho...</div></div>';
+try{
+const msg='Língua Alvo: '+(LANGS[lang]?.name||lang)+'\nPúblico: '+aud+'\nInstrução: '+(LANGS[lang]?.instruction||'')+'\n\n'+(outputs[2]||outputs[1]);
+const resp=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json','x-api-key':apiKey,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},body:JSON.stringify({model:model,max_tokens:8192,system:PROMPTS[3],messages:[{role:'user',content:msg}]})});
+if(!resp.ok)throw new Error('Erro de API');
+const data=await resp.json();
+studio.firstDraft=data.content?.[0]?.text||'';
+studio.editedDraft=studio.firstDraft;
+outputs[3]=studio.firstDraft;
+content.innerHTML='<div class="loading"><div class="spinner"></div><div class="loading-text">Analisando qualidade com o Consultor de Tradução...</div></div>';
+const analysisResp=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json','x-api-key':apiKey,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},body:JSON.stringify({model:model,max_tokens:8000,system:ANALYSIS_PROMPT,messages:[{role:'user',content:'REFERÊNCIA BÍBLICA: '+ref+'\n\nLÍNGUA ALVO: '+(LANGS[lang]?.name||lang)+'\n\nPÚBLICO ALVO: '+aud+'\n\nMAPA DE SIGNIFICADO:\n'+(outputs[2]||outputs[1])+'\n\nRASCUNHO DA TRADUÇÃO:\n'+studio.firstDraft}]})});
+if(analysisResp.ok){const analysisData=await analysisResp.json();const analysisText=analysisData.content?.[0]?.text||'';const match=analysisText.match(/\{[\s\S]*\}/);if(match){try{studio.analysis=JSON.parse(match[0]);}catch(e){console.error('Erro ao processar análise',e);}}}
+updateProgress(4);
+showStep(3);
+}catch(e){content.innerHTML='<div class="message message-error">Erro: '+e.message+'</div><div class="button-row"><button class="btn btn-primary" onclick="generateAndAnalyzeDraft()">Tentar Novamente</button><button class="btn btn-secondary" onclick="goToStep(2)">← Voltar</button></div>';}}
+
+function saveDraftEdits(){const textarea=document.getElementById('editableDraft');if(textarea){const newText=textarea.value;if(newText!==studio.editedDraft){studio.editHistory.push({timestamp:new Date().toISOString(),previous:studio.editedDraft,current:newText});studio.editedDraft=newText;outputs[3]=newText;}}}
+
+function buildStep4UI(){const langName=LANGS[document.getElementById('targetLang').value]?.name||'Língua Alvo';
+let html='<div class="card-header step-4"><div class="step-badge">4</div><div class="card-title"><h2>Revisar a Narração</h2><p>'+langName+'</p></div></div><div class="card-body">';
+html+='<div style="background:#e8f2f0;border:1px solid #89AAA3;border-radius:var(--radius-lg);padding:1.5rem;margin-bottom:1.5rem">';
+html+='<div style="display:flex;gap:1rem;align-items:center;flex-wrap:wrap;justify-content:center">';
+html+='<select id="studioLang" style="padding:0.75rem;border:2px solid #89AAA3;border-radius:var(--radius);min-width:200px">'+Object.entries(LANGS).map(([k,v])=>'<option value="'+k+'"'+(k===document.getElementById('targetLang').value?' selected':'')+'>'+v.name+'</option>').join('')+'</select>';
+html+='<button class="btn btn-secondary" onclick="showVoiceModal()">⚙️ Selecionar Voz</button>';
+html+='<button class="btn btn-success btn-large" onclick="generatePerformance()">🔊 Gerar Narração Oral</button>';
+html+='</div></div>';
+html+='<div id="audioPanel" class="validator-audio-panel" style="display:none">';
+html+='<h3 style="color:var(--validator-primary);margin-bottom:1rem">🔊 Narração Oral</h3>';
+html+='<div id="segmentNav" class="segment-nav"><div style="flex:1;display:flex;align-items:center;justify-content:center;color:#3F3E20">Carregando...</div></div>';
+html+='<button id="mainPlayBtn" class="main-play-btn" onclick="toggleMainPlay()"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></button>';
+html+='<div class="time-display"><span id="currentTime">0:00</span> / <span id="totalTime">0:00</span></div>';
+html+='<div class="audio-progress" onclick="seekAudio(event)"><div id="progressFill" class="audio-progress-fill"></div></div>';
+html+='<div style="display:flex;gap:0.75rem;justify-content:center;margin-top:1rem">';
+html+='<button class="btn btn-secondary btn-small" onclick="skipSegment(-1)">⏮️</button>';
+html+='<button class="btn btn-secondary btn-small" onclick="restartAudio()">🔄</button>';
+html+='<button class="btn btn-secondary btn-small" onclick="skipSegment(1)">⏭️</button>';
+html+='</div>';
+html+='<div id="audioStatus" style="margin-top:1rem;font-size:0.9rem;color:var(--text-secondary)"></div>';
+html+='<audio id="audioPlayer" style="display:none"></audio>';
+html+='</div>';
+html+='<div class="message message-info" style="margin-top:1.5rem"><strong>💡 Precisa fazer alterações?</strong> Volte ao Passo 3 para editar o texto, depois retorne aqui para gerar uma nova narração.</div>';
+html+='<div class="button-row"><button class="btn btn-secondary" onclick="goToStep(3)">← Voltar para Editar Rascunho</button></div>';
+html+='<div id="approvalSection" style="display:none;margin-top:1.5rem;padding:1.5rem;background:linear-gradient(135deg,#e8e9d9,#C5C29F);border:2px solid #777D45;border-radius:var(--radius-lg)">';
+html+='<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem">';
+html+='<h4 style="color:#3F3E20">✅ Aprovar Tradução</h4>';
+html+='<button id="approveBtn" class="btn btn-success btn-large" onclick="toggleApproval()">☐ Aprovar</button>';
+html+='</div></div>';
+html+='<div id="sessionSummarySection" style="display:none;margin-top:1.5rem;padding:1.5rem;background:linear-gradient(135deg,#F6F5EB,#C5C29F);border:2px solid #BE4A01;border-radius:var(--radius-lg)">';
+html+='<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;margin-bottom:1rem">';
+html+='<h3 style="color:#BE4A01">📦 Sessão Concluída</h3>';
+html+='<div style="display:flex;gap:0.75rem;flex-wrap:wrap">';
+html+='<button class="btn btn-primary" onclick="downloadSessionSummary()">📄 Baixar Resumo</button>';
+html+='<button class="btn btn-secondary" onclick="downloadAudioFile()">🔊 Baixar Áudio</button>';
+html+='<button class="btn btn-success" onclick="showSendModal()">📤 Enviar para Revisor</button>';
+html+='</div></div>';
+html+='<p style="color:#3F3E20;font-size:0.95rem">Seu trabalho está completo. Baixe seus arquivos ou envie o relatório da sessão para um revisor obter feedback.</p>';
+html+='</div>';
+html+='</div>';
+return html;}
+
+function initStep4(){studio.text=studio.editedDraft||studio.firstDraft||outputs[3]||'';if(studio.fullAudioUrl){document.getElementById('audioPanel').style.display='block';document.getElementById('approvalSection').style.display='block';segmentText();}}
+
+async function generatePerformance(){studio.text=studio.editedDraft||studio.firstDraft||outputs[3]||'';if(!studio.text){alert('Nenhum texto de rascunho disponível. Volte ao Passo 3.');return;}
+const key=document.getElementById('elevenLabsKey').value||localStorage.getItem('elevenlabs_api_key');if(!key){alert('Por favor, insira sua chave de API ElevenLabs.');return;}
+const langKey=document.getElementById('studioLang').value;loadVoiceConfig();const voiceId=voiceConfig[langKey];if(!voiceId){alert('Por favor, configure uma voz para '+LANGS[langKey].name+' primeiro.');showVoiceModal();return;}
+document.getElementById('audioPanel').style.display='block';document.getElementById('audioStatus').textContent='⏳ Gerando áudio...';segmentText();
+try{const resp=await fetch('https://api.elevenlabs.io/v1/text-to-speech/'+voiceId,{method:'POST',headers:{'Accept':'audio/mpeg','Content-Type':'application/json','xi-api-key':key},body:JSON.stringify({text:studio.text,model_id:'eleven_multilingual_v2',voice_settings:{stability:0.5,similarity_boost:0.75}})});
+if(!resp.ok)throw new Error('Erro ElevenLabs');
+const blob=await resp.blob();studio.fullAudioUrl=URL.createObjectURL(blob);
+const player=document.getElementById('audioPlayer');player.src=studio.fullAudioUrl;
+player.onloadedmetadata=()=>{calcSegmentTimings(player.duration);document.getElementById('totalTime').textContent=formatTime(player.duration);setupPlayerEvents();document.getElementById('audioStatus').textContent='✅ Pronto!';document.getElementById('approvalSection').style.display='block';};
+}catch(e){document.getElementById('audioStatus').textContent='❌ Erro: '+e.message;}}
+
+function segmentText(){const text=studio.text,parts=text.split(/(?<=[.!?:;])\s+/).filter(s=>s.trim());studio.segments=[];let buf='';for(let i=0;i<parts.length;i++){buf+=(buf?' ':'')+parts[i].trim();if(buf.length>=50||i===parts.length-1){studio.segments.push({id:studio.segments.length,text:buf.trim()});buf='';}}if(!studio.segments.length)studio.segments=[{id:0,text:text.trim()}];renderSegmentNav();}
+
+function renderSegmentNav(){const nav=document.getElementById('segmentNav');if(!nav)return;if(!studio.segments.length){nav.innerHTML='<div style="flex:1;display:flex;align-items:center;justify-content:center;color:#666">Sem segmentos</div>';return;}const total=studio.segments.reduce((s,seg)=>s+seg.text.length,0);nav.innerHTML=studio.segments.map((seg,i)=>{const w=(seg.text.length/total)*100,c=SEGMENT_COLORS[i%SEGMENT_COLORS.length];return '<div class="segment-block '+(i===studio.playingIdx?'playing':'')+'" style="flex:0 0 '+w+'%;background:'+c.bg+';color:'+c.color+'" title="'+escapeHtml(seg.text.substring(0,50))+'...">'+(i+1)+'</div>';}).join('');}
+
+function calcSegmentTimings(duration){const total=studio.segments.reduce((s,seg)=>s+seg.text.length,0);let t=0;studio.segments.forEach(seg=>{const dur=duration*(seg.text.length/total);seg.start=t;seg.end=t+dur;t+=dur;});}
+
+function setupPlayerEvents(){const player=document.getElementById('audioPlayer');player.ontimeupdate=()=>{document.getElementById('progressFill').style.width=(player.currentTime/player.duration)*100+'%';document.getElementById('currentTime').textContent=formatTime(player.currentTime);const idx=studio.segments.findIndex(s=>player.currentTime>=s.start&&player.currentTime<s.end);if(idx!==studio.playingIdx){studio.playingIdx=idx;renderSegmentNav();}};player.onplay=()=>{studio.isPlaying=true;updatePlayButton();};player.onpause=()=>{studio.isPlaying=false;updatePlayButton();};player.onended=()=>{studio.isPlaying=false;studio.playingIdx=-1;updatePlayButton();renderSegmentNav();};}
+
+function updatePlayButton(){const btn=document.getElementById('mainPlayBtn');if(!btn)return;if(studio.isPlaying){btn.classList.add('playing');btn.innerHTML='<svg viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>';}else{btn.classList.remove('playing');btn.innerHTML='<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>';}}
+
+function formatTime(s){if(isNaN(s))return'0:00';return Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');}
+function toggleMainPlay(){const player=document.getElementById('audioPlayer');if(!player.src){document.getElementById('audioStatus').textContent='⚠️ Gere o áudio primeiro';return;}if(studio.isPlaying)player.pause();else player.play();}
+function restartAudio(){const player=document.getElementById('audioPlayer');player.currentTime=0;player.play();}
+function seekAudio(e){const player=document.getElementById('audioPlayer'),rect=e.target.getBoundingClientRect();player.currentTime=((e.clientX-rect.left)/rect.width)*player.duration;}
+function skipSegment(delta){const current=studio.playingIdx>=0?studio.playingIdx:0,next=Math.max(0,Math.min(studio.segments.length-1,current+delta));if(studio.segments[next]){const player=document.getElementById('audioPlayer');player.currentTime=studio.segments[next].start;player.play();}}
+
+function toggleApproval(){studio.approved=!studio.approved;document.getElementById('approveBtn').innerHTML=studio.approved?'✅ Aprovado':'☐ Aprovar';document.getElementById('sessionSummarySection').style.display=studio.approved?'block':'none';}
+
+async function runStep(step){const apiKey=document.getElementById('apiKey').value||localStorage.getItem('anthropic_api_key'),model=document.getElementById('modelSelect').value,ref=document.getElementById('biblicalRef').value,out=document.getElementById('output'+step);out.innerHTML='<div class="loading"><div class="spinner"></div><div class="loading-text">Processando...</div></div>';let msg='';if(step===1)msg='Referência Bíblica: '+ref+'\n\nCrie o Mapa de Significado em JSON. Todos os rótulos e descrições devem estar em português brasileiro.';else if(step===2)msg=document.getElementById('input2').value;
+try{const resp=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json','x-api-key':apiKey,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},body:JSON.stringify({model:model,max_tokens:8192,system:PROMPTS[step],messages:[{role:'user',content:msg}]})});if(!resp.ok)throw new Error('Erro de API');const data=await resp.json(),result=data.content?.[0]?.text||'';outputs[step]=result;currentStep=step;updateProgress(step+1);
+let nextBtn='';if(step===1)nextBtn='<button class="btn btn-primary btn-large" onclick="goToStep(2);runStep(2)">▶️ Mapear o Discurso</button>';else if(step===2)nextBtn='<button class="btn btn-primary btn-large" onclick="goToStep(3)">▶️ Revisar o Rascunho</button>';
+out.innerHTML='<div class="message message-success">✓ Passo '+step+' concluído</div><label class="text-label">Resultado:</label><textarea class="text-box json-output" rows="6" readonly>'+result+'</textarea><div class="button-row">'+(step>1?'<button class="btn btn-secondary" onclick="goToStep('+(step-1)+')">← Voltar</button>':'')+'<button class="btn btn-secondary" onclick="navigator.clipboard.writeText(outputs['+step+']).then(()=>alert(\'Copiado!\'))">📋 Copiar</button>'+nextBtn+'</div>';}catch(e){out.innerHTML='<div class="message message-error">Erro: '+e.message+'</div><div class="button-row"><button class="btn btn-primary" onclick="runStep('+step+')">Tentar Novamente</button></div>';}}
+
+function goToStep(step){if(step===3&&document.getElementById('editableDraft')){saveDraftEdits();}currentStep=step;updateProgress(step);showStep(step);window.scrollTo({top:0,behavior:'smooth'});}
+
+function showVoiceModal(){document.getElementById('voiceModal').style.display='flex';loadVoiceConfig();document.getElementById('voiceConfigList').innerHTML=Object.entries(LANGS).map(([k,v])=>'<div style="margin-bottom:1rem"><label style="font-weight:600">'+v.name+'</label><input type="text" class="voice-input" data-lang="'+k+'" value="'+(voiceConfig[k]||'')+'" placeholder="ID da Voz ElevenLabs" style="width:100%;padding:0.5rem;margin-top:0.25rem;border:1px solid var(--border);border-radius:var(--radius)"></div>').join('')+'<p style="font-size:0.85em;color:#666">Obtenha IDs de Voz em <a href="https://elevenlabs.io" target="_blank">ElevenLabs</a></p>';}
+function hideVoiceModal(){document.getElementById('voiceModal').style.display='none';}
+function loadVoiceConfig(){const s=localStorage.getItem('voice_config');if(s)voiceConfig=JSON.parse(s);}
+function saveVoiceConfig(){document.querySelectorAll('.voice-input').forEach(inp=>{if(inp.value.trim())voiceConfig[inp.dataset.lang]=inp.value.trim();else delete voiceConfig[inp.dataset.lang];});localStorage.setItem('voice_config',JSON.stringify(voiceConfig));hideVoiceModal();alert('Salvo!');}
+
+function showSendModal(){document.getElementById('sendReportModal').style.display='flex';}
+function hideSendModal(){document.getElementById('sendReportModal').style.display='none';}
+function sendToReviewer(){const email=document.getElementById('reviewerEmail').value;if(!email){alert('Por favor, insira o e-mail do revisor.');return;}const notes=document.getElementById('reviewerNotes').value;const summary=generateSummaryHTML(notes,email);const blob=new Blob([summary],{type:'text/html'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href='mailto:'+email+'?subject=Solicitação de Revisão de Tradução: '+encodeURIComponent(document.getElementById('biblicalRef').value)+'&body='+encodeURIComponent('Por favor, encontre o relatório da sessão anexo para revisão.\n\nObservações: '+(notes||'Nenhuma')+'\n\nO relatório HTML completo está anexado separadamente.');a.click();downloadSessionSummary();hideSendModal();alert('Cliente de e-mail aberto e relatório baixado. Por favor, anexe o arquivo HTML baixado ao seu e-mail.');}
+
+function generateSummaryHTML(notes,reviewer){const ref=document.getElementById('biblicalRef').value||'Referência Desconhecida';const lang=LANGS[document.getElementById('targetLang').value]?.name||'Desconhecida';const aud=document.getElementById('targetAudience').value||'Geral';const now=new Date().toLocaleString('pt-BR');
+return `<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Relatório da Sessão - ${escapeHtml(ref)}</title>
+<style>
+body{font-family:'Segoe UI',system-ui,sans-serif;max-width:900px;margin:0 auto;padding:2rem;line-height:1.7;color:#0A0703;background:#F6F5EB}
+h1{color:#BE4A01;border-bottom:3px solid #BE4A01;padding-bottom:0.5rem}
+h2{color:#3F3E20;margin-top:2rem;border-left:4px solid #89AAA3;padding-left:1rem}
+h3{color:#777D45;margin-top:1.5rem}
+.meta{background:#C5C29F;padding:1rem;border-radius:8px;margin-bottom:2rem}
+.meta-item{margin:0.5rem 0}
+.meta-label{font-weight:600;color:#3F3E20}
+.section{background:white;border:1px solid #C5C29F;border-radius:8px;padding:1.5rem;margin:1rem 0}
+.json-block{background:#0A0703;color:#F6F5EB;padding:1rem;border-radius:8px;overflow-x:auto;font-family:monospace;font-size:0.85rem;white-space:pre-wrap;max-height:400px;overflow-y:auto}
+.text-block{background:#e8e9d9;border:1px solid #777D45;padding:1rem;border-radius:8px;font-size:1.05rem}
+.analysis-block{background:#e8f2f0;border:1px solid #89AAA3;padding:1rem;border-radius:8px;margin:1rem 0}
+.edit-item{background:#F6F5EB;border-left:4px solid #BE4A01;padding:0.75rem 1rem;margin:0.5rem 0;border-radius:0 8px 8px 0}
+.reviewer-notes{background:#e8f2f0;border:2px solid #89AAA3;padding:1rem;border-radius:8px;margin:1rem 0}
+footer{margin-top:3rem;padding-top:1rem;border-top:1px solid #C5C29F;color:#777D45;font-size:0.85rem;text-align:center}
+</style>
+</head>
+<body>
+<h1>📋 Relatório da Sessão de Tradução</h1>
+
+<div class="meta">
+<div class="meta-item"><span class="meta-label">Referência Bíblica:</span> ${escapeHtml(ref)}</div>
+<div class="meta-item"><span class="meta-label">Língua Alvo:</span> ${escapeHtml(lang)}</div>
+<div class="meta-item"><span class="meta-label">Público Alvo:</span> ${escapeHtml(aud)}</div>
+<div class="meta-item"><span class="meta-label">Data da Sessão:</span> ${now}</div>
+<div class="meta-item"><span class="meta-label">Status:</span> <span style="background:#e8e9d9;color:#777D45;padding:0.25rem 0.75rem;border-radius:20px;font-weight:600">✅ Aprovado</span></div>
+${reviewer?'<div class="meta-item"><span class="meta-label">Enviado para:</span> '+escapeHtml(reviewer)+'</div>':''}
+</div>
+
+${notes?'<div class="reviewer-notes"><strong>📝 Observações para o Revisor:</strong><p>'+escapeHtml(notes)+'</p></div>':''}
+
+<h2>1. Mapa de Significado (Eventos)</h2>
+<div class="section">
+<div class="json-block">${escapeHtml(outputs[1]||'Não gerado')}</div>
+</div>
+
+<h2>2. Estrutura de Discurso</h2>
+<div class="section">
+<div class="json-block">${escapeHtml(outputs[2]||'Não gerado')}</div>
+</div>
+
+<h2>3. Rascunho da Tradução</h2>
+<div class="section">
+<h3>Rascunho Gerado pela IA</h3>
+<div class="text-block">${escapeHtml(studio.firstDraft)||'<em>Não gerado</em>'}</div>
+
+${studio.analysis?`<h3>Análise do Consultor de Tradução</h3>
+<div class="analysis-block">
+${(studio.analysis.resumo_executivo||studio.analysis.executive_summary)?'<p><strong>Resumo:</strong> '+escapeHtml(studio.analysis.resumo_executivo||studio.analysis.executive_summary)+'</p>':''}
+${(studio.analysis.avaliacao_geral||studio.analysis.overall_assessment)?.pronto_para_performance!==undefined||(studio.analysis.avaliacao_geral||studio.analysis.overall_assessment)?.ready_for_performance!==undefined?'<p><strong>Pronto para Narração:</strong> '+((studio.analysis.avaliacao_geral||studio.analysis.overall_assessment).pronto_para_performance||(studio.analysis.avaliacao_geral||studio.analysis.overall_assessment).ready_for_performance?'Sim':'Não')+'</p>':''}
+</div>`:''}
+
+${studio.editedDraft&&studio.editedDraft!==studio.firstDraft?`<h3>Rascunho Editado (Final)</h3>
+<div class="text-block" style="background:#e8e9d9;border-color:#777D45">${escapeHtml(studio.editedDraft)}</div>`:'<p><em>Nenhuma edição manual foi feita no rascunho.</em></p>'}
+
+${studio.editHistory.length>0?`<h3>Histórico de Edições</h3>
+${studio.editHistory.map((e,i)=>'<div class="edit-item"><strong>Edição #'+(i+1)+'</strong> - '+new Date(e.timestamp).toLocaleString('pt-BR')+'</div>').join('')}`:''}
+</div>
+
+<h2>4. Texto Final Aprovado</h2>
+<div class="section">
+<div class="text-block" style="background:#e8e9d9;border-color:#777D45;font-size:1.1rem">${escapeHtml(studio.editedDraft||studio.firstDraft)||'<em>Não disponível</em>'}</div>
+</div>
+
+<h2>5. Narração Oral</h2>
+<div class="section">
+<p><strong>Status:</strong> ${studio.fullAudioUrl?'✅ Áudio gerado e aprovado':'⏳ Nenhum áudio gerado'}</p>
+<p><em>O arquivo de áudio deve ser baixado separadamente usando o aplicativo.</em></p>
+</div>
+
+<footer>
+<p><strong>Projeto Vasos Preparados</strong></p>
+<p>Tradução Bíblica Shema • Universidade das Nações</p>
+</footer>
+</body>
+</html>`;}
+
+function downloadSessionSummary(){const html=generateSummaryHTML();const blob=new Blob([html],{type:'text/html'});const url=URL.createObjectURL(blob);const a=document.createElement('a');const ref=document.getElementById('biblicalRef').value||'sessao';a.href=url;a.download='relatorio_sessao_'+ref.replace(/[^a-z0-9]/gi,'_')+'_'+new Date().toISOString().slice(0,10)+'.html';a.click();URL.revokeObjectURL(url);}
+
+function downloadAudioFile(){if(!studio.fullAudioUrl){alert('Nenhum arquivo de áudio disponível. Gere a narração oral primeiro.');return;}const ref=document.getElementById('biblicalRef').value||'audio';const a=document.createElement('a');a.href=studio.fullAudioUrl;a.download='narracao_oral_'+ref.replace(/[^a-z0-9]/gi,'_')+'_'+new Date().toISOString().slice(0,10)+'.mp3';a.click();}
+
+function escapeHtml(text){if(!text)return'';return String(text).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#039;');}
+
+document.addEventListener('DOMContentLoaded',()=>{const k1=localStorage.getItem('anthropic_api_key'),k2=localStorage.getItem('elevenlabs_api_key');if(k1)document.getElementById('apiKey').value=k1;if(k2)document.getElementById('elevenLabsKey').value=k2;loadVoiceConfig();});
+</script>
+</body>
+</html>
